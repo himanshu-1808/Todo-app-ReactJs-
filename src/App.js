@@ -8,6 +8,7 @@ function App() {
         <div className="center_div">
 <br/>
 <input type="text" placeholder="Add items"/>
+<button>Click</button>
         </div>
       </div>
     </>
