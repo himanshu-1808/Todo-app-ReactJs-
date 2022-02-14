@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, { useState } from "react"
+import ToDoList from './ToDoList';
 function App() {
   const [inputList, setInputList] = useState();
   const [Items, setItems] = useState([]);
@@ -11,9 +12,20 @@ function App() {
   const listofItems= ()=> {
     setItems((oldItems)=> {
       return [...oldItems, inputList];
+      
     });
+    setInputList("");
   };
  
+ 
+const deleteItems=(id)=>{
+setItems((oldItems)=>{
+  return oldItems.filter((arrElem,index)=>{
+return index!== id 
+  })
+})
+}
+
 
   return (
     <>
@@ -22,15 +34,16 @@ function App() {
           <br />
           <h1>To Do List</h1>
           <br />
-          <input type="text" onChange={itemEvent} placeholder="Add items" />
+          <input type="text" onChange={itemEvent} value={inputList} placeholder="Add items" />
 
           <button onClick={listofItems}>+</button>
           <ol>
-            {Items.map((itemVal)=> {
-                return <li>{itemVal}</li>;
-              })}
-            
-          </ol>
+        {Items.map((itemVal,index)=> {
+          return <ToDoList key={index} id={index} text={itemVal}
+          onSelect={deleteItems}
+          />;
+        })}
+        </ol>
         </div>
       </div>
     </>
